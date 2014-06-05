@@ -1,0 +1,8 @@
+this.$field.getName() = 
+#if ($field.getInitialization().class.name.endsWith("TypeModel"))
+#set ($fieldType = $field)
+new #parse("fieldTypeDisplay.vm")();
+#else
+#set ($value = $field)
+#parse("valueDisplay.vm");
+#end

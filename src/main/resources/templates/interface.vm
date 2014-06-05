@@ -1,0 +1,38 @@
+package $interfaceModel.getBasePackage();
+
+#foreach($referencedType in $interfaceModel.getReferencedTypes())
+#if(!$referencedType.getNameSpace().equals("java.lang"))import ${referencedType.getQualifiedName()};
+#end
+#end
+
+#foreach($annotation in $interfaceModel.getAnnotations())
+#parse("annotation.vm")
+
+#end
+public interface ${interfaceModel.getName()}#if(!$interfaceModel.getGenerics().isEmpty())
+<##
+#set ($i = 0)
+#foreach ($fieldType in $interfaceModel.getGenerics())
+#parse("fieldTypeDisplay.vm")
+#set ($i = $i + 1)
+#if ($i < $interfaceModel.getGenerics().size()), #end
+>##
+#end	
+#end
+#if(!$interfaceModel.getInterfaces().isEmpty()) 
+ extends ##
+#set ($i = 0)
+#foreach ($fieldType in $interfaceModel.getInterfaces())
+#parse("fieldTypeDisplay.vm")
+#set ($i = $i + 1)
+#if ($i < $interfaceModel.getInterfaces().size()), #end
+#end
+ {
+#end
+
+#foreach($method in ${interfaceModel.getMethods()})
+#parse("methodInterfaceDeclaration.vm")
+
+
+#end
+}

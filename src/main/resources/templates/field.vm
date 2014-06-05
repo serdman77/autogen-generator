@@ -1,0 +1,6 @@
+#foreach($annotation in $field.getAnnotations())
+	#parse("annotation.vm")
+
+#end
+#set($type = $field.getType())
+	${field.getAccessLevel().toString().toLowerCase()} #if(!$field)void#else#parse("type.vm")#end $field.getName();

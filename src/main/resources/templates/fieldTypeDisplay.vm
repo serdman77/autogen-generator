@@ -1,0 +1,11 @@
+$fieldType.getName()##
+#if ($fieldType.getContainedTypes().size()>0)
+<##
+#set($i = 0)
+#foreach ($fieldType in $fieldType.getContainedTypes())
+#parse("fieldTypeDisplay.vm")
+#set ($i = $i + 1)
+#if ($i<$fieldType.getContainedTypes.size()),#end
+#end
+>##
+#end

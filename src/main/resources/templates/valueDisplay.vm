@@ -1,0 +1,19 @@
+#set ($type = $value.getClass.getName())##
+#if ($type.startsWith("java.lang"))
+	#if ($type.equals("java.lang.int"))
+$value
+	#elseif ($type.equals("java.lang.long"))
+${value}l
+	#elseif ($type.equals("java.lang.float"))
+${value}f
+	#elseif ($type.equals("java.lang.double"))
+${value}d
+	#elseif ($type.equals("java.lang.String"))
+"${value}"
+	#end
+#elseif ($type.endsWith("AnnotationModel"))
+#set($annotation = $type)##
+#parse("annotation.vm")
+#else
+new $type($value.toString())
+#end

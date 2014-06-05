@@ -1,0 +1,8 @@
+#set($i=1)##
+#foreach($key in $map.keySet())##
+$key=##
+#set($value=$map.get($key))##
+#parse("valueDisplay.vm")
+#set($i = $i + 1)##
+#if($i<$map.size()), #end##
+#end

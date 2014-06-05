@@ -1,0 +1,4 @@
+#foreach($annotation in $method.getAnnotations())
+#parse("annotation.vm")
+#end
+	${method.getAccessLevel().toString().toLowerCase()} #if(!$method.getType())void#else$method.getType().getName()#end ${method.getName()}(${joiner.join(${method.getParameters()})});

@@ -1,0 +1,51 @@
+package $package;
+
+#foreach($referencedType in $classModel.getReferencedTypes())
+#if (!$referencedType.getNameSpace().equals("java.lang"))
+import $referencedType.getQualifiedName();
+#end
+#end
+
+#foreach($annotation in $interfaceModel.getAnnotations())
+#parse("annotation.vm")
+#end
+
+public class $classModel.getName()##
+#if(!$classModel.getGenerics().isEmpty())
+<##
+#set ($i = 0)
+#foreach ($fieldType in $classModel.getGenerics())
+#parse("fieldTypeDisplay.vm")
+#if ($i < $classModel.getGenerics().size()), #end
+>##
+#end	
+#end
+#if(!$classModel.getInterfaces().isEmpty()) 
+ implements 
+	#set ($i = 0)
+	#foreach ($fieldType in $classModel.getInterfaces())
+#parse("fieldTypeDisplay.vm")
+		#if ($i < $classModel.getInterfaces().size()), #end
+	#end {
+#end
+
+#foreach($field in ${classModel.getFields()})
+#parse("field.vm")
+
+
+#end
+	public ${classModel.getName()}(){
+	#foreach($field in ${classmodel.getFields()})
+		#if (!$field.getInitialization())
+		#parse("fieldInitialization.vm")
+		
+		#end
+	#end
+	}
+
+#foreach($method in ${classModel.getMethods()})
+#parse("methodDeclaration.vm")
+
+
+#end
+}

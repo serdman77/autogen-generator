@@ -1,0 +1,7 @@
+@${annotation.getSimpleAnnotationName()}##
+#if(${annotation.getDisplayAttributes().size()} > 0)
+(##
+#set($map = $annotation.getDisplayAttributes())
+#parse("mapSimpleOutput.vm")
+)##
+#end
